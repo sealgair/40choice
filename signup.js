@@ -27,7 +27,7 @@
     }
 
     function choose(l) {
-        const i = randInt(l.length);
+        const i = randInt(l.length-1);
         return l[i];
     }
 
