@@ -1104,7 +1104,13 @@
             $(".-day.-in_campaign:nth-child(" + day + ")").first().click()
             window.setTimeout(function () {
                 console.log("clickity");
-                $(choose($(".-hour_row.active .-hour_cell"))).click();
+                var hours = $(".-hour_row.active .-hour_cell");
+                shuffle(hours);
+                hours.sort(function (a, b) {
+                    return parseInt(a.textContent) - parseInt(b.textContent);
+                });
+                $(hours[0]).click();
+
                 $("#styled-checkbox-counter").click()
                 window.setTimeout(function () {
                     if (days.length > 0) {
