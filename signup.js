@@ -14,13 +14,16 @@
         }
     }
 
-    function randInt(max, min) {
-        min ||= 0;
-        return Math.floor(Math.random() * max - min) + min;
+    function randInt(min, max) {
+        if (max === undefined) {
+            max = min;
+            min = 0;
+        }
+        return Math.floor(Math.random() * (max + 1 - min)) + min;
     }
 
     function year() {
-        return 2021 - randInt(98, 24);
+        return 2021 - randInt(24, 98);
     }
 
     function choose(l) {
@@ -34,10 +37,10 @@
         const end = "@" + choose(domains)
         switch (randInt(3)) {
             case 1:
-                return fn + "." + ln.substr(0, randInt(5, 2)) + "." + by + end;
+                return fn + "." + ln.substr(0, randInt(2, 5)) + "." + by + end;
                 break;
             case 2:
-                return fn.substr(0, randInt(2, 1)) + "." + ln + "." + by + end;
+                return fn.substr(0, randInt(1, 2)) + "." + ln + "." + by + end;
                 break;
             default:
                 return fn + "." + ln + end;
@@ -1084,8 +1087,17 @@
         scrollToCaptcha(".-signup_overlay.popup_box");
     } else if (window.location.pathname == "/en/vigil-hours-signup.aspx") {
         var days = [1, 2, 3, 4, 5, 6, 7];
-        shuffle(days);
-        days = days.slice(0, 3);
+        var coverage = days.map(function (d) {
+            var total = 0;
+            $(".-day.-in_campaign:nth-child(" + d + ")").each(function(i, elem) {
+                total += parseInt($(elem).find(".percentage").text());
+            });
+            return {day: d, cover: total};
+        });
+        coverage.sort(function (a, b) {
+            return a.cover - b.cover;
+        })
+        days = coverage.map(x => x.day).slice(0, randInt(2, 5));
 
         function signUpDay(days) {
             var day = days.pop();
