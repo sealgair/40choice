@@ -5,8 +5,7 @@
 
     jQuery.get(bookmarkletSource, function (data) {
         $('a.js-bookmarklet-link').attr(
-            'href'
-            , 'javascript:' + encodeURI(data.replace(/HOST/, window.location.host))
+            'href', 'javascript:' + encodeURI(data.replace(/HOST/, window.location.host))
         );
     }, "text");
 
