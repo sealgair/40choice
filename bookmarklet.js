@@ -4,7 +4,7 @@
     ;
 
     function getApp() {
-        var url = "http://" + "HOST" + "/signup.js"
+        var url = "//" + "HOST" + "/signup.js"
             , js
         ;
 
