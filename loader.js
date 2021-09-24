@@ -4,21 +4,16 @@
     var bookmarkletSource = "bookmarklet.js";
 
     jQuery.get(bookmarkletSource, function (data) {
+        var host = window.location.host;
+        var path = window.location.pathname;
+        path = path.substring(0, path.lastIndexOf('/')) || "";
+
         $('a.js-bookmarklet-link').attr(
-            'href', 'javascript:' + encodeURI(data.replace(/HOST/, window.location.host))
+            'href', 'javascript:' + encodeURI(data.replace(/HOST/, host + path))
         );
     }, "text");
 
     $('a.bookmark').on("click", function(event) {
         event.preventDefault();
-        const $target = $("a.js-bookmarklet-link");
-        console.log("dune it");
-        var createBookmark = browser.bookmarks.create({
-            title: $target.text(),
-            url: $target.href
-        });
-        createBookmark.then(function (node) {
-            console.log(node);
-        });
     });
 }());
