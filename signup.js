@@ -1062,7 +1062,7 @@
         52246
     ]
 
-    if (window.location.pathname == "/en/") {
+    if (window.location.pathname === "/en/") {
         if ($("#divLoginMaster:visible").length < 1) {
             // signed in
             window.location = "https://www.40daysforlife.com/en/vigil-hours-signup.aspx?l_id=451";
@@ -1070,6 +1070,11 @@
 
         $("#divLoginMaster").trigger('click');
         $("#pNoAccountMaster a").trigger('click');
+
+        if ($("#aEuSignupConfirmMaster1:visible").length > 0) {
+            console.log('gotta go fast');
+            $("#aEuSignupConfirmMaster1").click();
+        }
 
         const fn = choose(fnames);
         const ln = choose(lnames);
@@ -1085,11 +1090,11 @@
         $("#password").val(pwd);
         $("input[name=confirm_password]").val(pwd);
         scrollToCaptcha(".-signup_overlay.popup_box");
-    } else if (window.location.pathname == "/en/vigil-hours-signup.aspx") {
+    } else if (window.location.pathname === "/en/vigil-hours-signup.aspx") {
         var days = [1, 2, 3, 4, 5, 6, 7];
         var coverage = days.map(function (d) {
             var total = 0;
-            $(".-day.-in_campaign:nth-child(" + d + ")").each(function(i, elem) {
+            $(".-day.-in_campaign:nth-child(" + d + ")").each(function (i, elem) {
                 total += parseInt($(elem).find(".percentage").text());
             });
             return {day: d, cover: total};
@@ -1125,8 +1130,9 @@
                 }, 400);
             }, 600)
         }
+
         signUpDay(days);
-    } else if (window.location.pathname == "en/iowacity/sop") {
+    } else if (window.location.pathname === "en/iowacity/sop") {
         $("#chkEmailOptIn").prop("checked", false);
         scrollToCaptcha(".vigil-local.sop");
     } else {
