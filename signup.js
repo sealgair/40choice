@@ -27,7 +27,7 @@
     }
 
     function choose(l) {
-        const i = randInt(l.length-1);
+        const i = randInt(l.length - 1);
         return l[i];
     }
 
@@ -1137,10 +1137,10 @@
     } else if (window.location.pathname === "en/iowacity/sop") {
         $("#chkEmailOptIn").prop("checked", false);
         scrollToCaptcha(".vigil-local.sop");
-    } else if (window.location.pathname === "en/member-landing.aspx") {
-        $("#lnkLogout").click();
-        window.location = "https://www.40daysforlife.com/en/";
     } else {
+        if ($("#lnkLogout").length > 0) {
+            $("#lnkLogout").click();
+        }
         window.location = "https://www.40daysforlife.com/en/";
     }
 }());
