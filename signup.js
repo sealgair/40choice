@@ -1068,7 +1068,9 @@
             window.location = "https://www.40daysforlife.com/en/vigil-hours-signup.aspx?l_id=451";
         }
 
-        $("#divLoginMaster").trigger('click');
+        if ($("#pNoAccountMaster a:visible").length < 1) {
+            $("#divLoginMaster").trigger('click');
+        }
         $("#pNoAccountMaster a").trigger('click');
 
         if ($("#aEuSignupConfirmMaster1:visible").length > 0) {
