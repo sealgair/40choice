@@ -1134,7 +1134,7 @@
         }
 
         signUpDay(days);
-    } else if (window.location.pathname === "en/iowacity/sop") {
+    } else if (window.location.pathname === "/en/iowacity/sop") {
         $("#chkEmailOptIn").prop("checked", false);
         scrollToCaptcha(".vigil-local.sop");
     } else {
